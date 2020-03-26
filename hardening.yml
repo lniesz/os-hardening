@@ -188,9 +188,10 @@
       failed_when: result.rc == 0
     - name: 2.4.1 Ensure permissions on bootloader config are configured
       tag: check
-      shell: stat /boot/grub2/grub.cfg|grep "Access: (0600/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)"
+      shell: |
+        stat /boot/grub2/grub.cfg|grep "Access: (0600/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)"
       register: result
-      failed_when: result.rc == 0
+      failed_when: result.rc == 1
     - name: 2.4.2 Ensure bootloader password is set
       tag: nocheck
       shell: 
