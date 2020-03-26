@@ -188,7 +188,7 @@
       failed_when: result.rc == 0
     - name: 2.4.1 Ensure permissions on bootloader config are configured
       tag: check
-      shell: stat -c %a%U%G /boot/grub2/grub.cfg | grep 644rootroot
+      shell: stat -c %a%U%G /boot/grub2/grub.cfg | grep 600rootroot
       register: result
       failed_when: result.rc == 1
     - name: 2.4.2 Ensure bootloader password is set
@@ -273,17 +273,17 @@
       failed_when: result.rc == 1
     - name: 2.7.4 Ensure permissions on /etc/motd are configured
       tag: check
-      shell: stat /etc/motd|grep "Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)"
+      shell: stat -c %a%U%G /etc/motd | grep 644rootroot
       register: result
       failed_when: result.rc == 1
     - name: 2.7.5 Ensure permissions on /etc/issue are configured
       tag: check
-      shell: stat /etc/issue|grep "Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)"
+      shell: stat /etc/issue | grep 644rootroot
       register: result
       failed_when: result.rc == 1
     - name: 2.7.6 Ensure permissions on /etc/issue.net are configured
       tag: check
-      shell: stat /etc/issue.net|grep "Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)"
+      shell: stat /etc/issue.net | grep 644rootroot
       register: result
       failed_when: result.rc == 1
     - name: 2.7.7 Ensure GDM login banner is configured
