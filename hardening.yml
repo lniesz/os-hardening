@@ -298,7 +298,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
-- name: 2.8.2 Ensure daytime services are not enabled
+    - name: 2.8.2 Ensure daytime services are not enabled
       tag: check
       shell: |
         systemctl is-enabled xinetd
