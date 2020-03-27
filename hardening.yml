@@ -1032,7 +1032,8 @@
       failed_when: result.rc == 0
     - name: 2.22.6 Ensure default group for the root account is GID 0
       tag: check
-      shell: grep "^root:" /etc/passwd | cut -f4 -d: | grep 0
+      shell: |
+        grep "^root:" /etc/passwd | cut -f4 -d: | grep 0
       register: result
       failed_when: result.rc == 1
     - name: 2.22.7 Ensure default user umask is 027 or more restrictive
