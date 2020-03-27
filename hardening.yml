@@ -293,59 +293,81 @@
       failed_when: result.rc == 0
     - name: 2.8.1 Ensure chargen services are not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
-    - name: 2.8.2 Ensure daytime services are not enabled
+      failed_when: result.rc == 0
+- name: 2.8.2 Ensure daytime services are not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.8.3 Ensure discard services are not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.8.4 Ensure echo services are not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.8.5 Ensure time services are not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.8.6 Ensure rsh server is not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.8.7 Ensure talk server is not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.8.8 Ensure telnet server is not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.8.9 Ensure tftp server is not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.8.10 Ensure rsync service is not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.8.11 Ensure xinetd is not enabled
       tag: check
-      shell: systemctl is-enabled xinetd
-     chkconfig --list xinetd
+      shell: |
+        systemctl is-enabled xinetd
+        chkconfig --list xinetd
       register: result
+      failed_when: result.rc == 0
     - name: 2.9.1 Ensure time synchronization is in use
       tag: check
       shell: rpm -q ntp chrony | grep "is not installed" | wc -l | grep 2
