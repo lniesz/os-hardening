@@ -1026,7 +1026,7 @@
       failed_when: result.rc == 0
     - name: 2.22.5 Ensure system accounts are non-login
       tag: check
-      shell: egrep -v "^\+" /etc/passwd | awk -F: '($1!="root" && $1!="sync" && $1!="shutdown" && $1!="halt" && $3<1000 && $7!="/sbin/nologin" && $7!="/bin/false") {print}'
+      shell: egrep -v "^\+" /etc/passwd | awk -F: '($1!="root" && $1!="sync" && $1!="shutdown" && $1!="halt" && $3<1000 && $7!="\/sbin\/nologin" && $7!="\/bin\/false") {print}'
       register: result
       failed_when: result.rc == 0
     - name: 2.22.6 Ensure default group for the root account is GID 0
