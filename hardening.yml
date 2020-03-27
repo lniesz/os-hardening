@@ -55,6 +55,7 @@
       shell: mount | grep /tmp | grep tmplv
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.10 Ensure nodev option set on /tmp partition
       tags:
         - check
