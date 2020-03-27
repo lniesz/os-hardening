@@ -7,48 +7,56 @@
       shell: lsmod | grep cramfs 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.2 Ensure mounting of freevxfs filesystems is disabled
       tags:
         - check
       shell: lsmod | grep freevxfs 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.3 Ensure mounting of jffs2 filesystems is disabled
       tags:
         - check
       shell: lsmod | grep jffs2 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.4 Ensure mounting of hfs filesystems is disabled
       tags:
         - check
       shell: lsmod | grep hfs 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.5 Ensure mounting of hfsplus filesystems is disabled
       tags:
         - check
       shell: lsmod | grep hfsplus 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.6 Ensure mounting of squashfs filesystems is disabled
       tags:
         - check
       shell: lsmod | grep squashfs 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.7 Ensure mounting of udf filesystems is disabled
       tags:
         - check
       shell: lsmod | grep udf 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.8 Ensure mounting of FAT filesystems is disabled
       tags:
         - check
       shell: lsmod | grep vfat 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.9 Ensure separate partition exists for /tmp
       tags:
         - check
@@ -62,294 +70,343 @@
       shell: mount | grep /tmp | grep tmplv | grep nodev
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.11 Ensure nosuid option set on /tmp partition
       tags:
         - check
       shell: mount | grep /tmp | grep tmplv | grep nosuid
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.12 Ensure noexec option set on /tmp partition
       tags:
         - check
       shell: mount | grep /tmp | grep tmplv | grep noexec
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.13 Ensure separate partition exists for /var
       tags:
         - check
       shell: mount | grep "/var " | grep varlv
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.14 Ensure separate partition exists for /var/tmp
       tags:
         - check
       shell: mount | grep /var/tmp | grep vartmplv
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.15 Ensure nodev option set on /var/tmp partition
       tags:
         - check
       shell: mount | grep /var/tmp | grep vartmplv | grep nodev
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.16 Ensure nosuid option set on /var/tmp partition
       tags:
         - check
       shell: mount | grep /var/tmp | grep vartmplv | grep nosuid
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.17 Ensure noexec option set on /var/tmp partition
       tags:
         - check
       shell: mount | grep /var/tmp | grep vartmplv | grep noexec
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.18 Ensure separate partition exists for /var/log
       tags:
         - check
       shell: mount | grep /var/log 
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.19 Ensure separate partition exists for /var/log/audit
       tags:
         - check
       shell: mount | grep /var/log/audit | grep varlogauditlv
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.20 Ensure separate partition exists for /home
       tags:
         - check
       shell: mount | grep "/home " | grep homelv
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.21 Ensure nodev option set on /home partition
       tags:
         - check
       shell: mount | grep "/home " | grep homelv | grep nodev
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.22 Ensure nodev option set on /dev/shm partition
       tags:
         - check
       shell: mount | grep /dev/shm | grep nodev
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.23 Ensure nosuid option set on /dev/shm partition
       tags:
         - check
       shell: mount | grep /dev/shm | grep nosuid
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.24 Ensure noexec option set on /dev/shm partition
       tags:
         - check
       shell: mount | grep /dev/shm | grep noexec
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.1.25 Ensure nodev option set on removable media partitions
       tags:
         - check
       shell: mount|grep -E "cdrom|floppy"|grep -E "nodev|nosuid|noexec"
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.26 Ensure nosuid option set on removable media partitions
       tags:
         - check
       shell: mount|grep -E "cdrom|floppy"|grep -E "nodev|nosuid|noexec"
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.27 Ensure noexec option set on removable media partitions
       tags:
         - check
       shell: mount|grep -E "cdrom|floppy"|grep -E "nodev|nosuid|noexec"
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.28 Ensure sticky bit is set on all world-writable directories
       tags:
         - check
       shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.1.29 Disable Automounting
       tags:
         - check
       shell: systemctl is-enabled autofs|grep enabled
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.2.1 Ensure package manager repositories are configured
       tags:
         - check
       shell: yum repolist
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.2.2 Ensure gpgcheck is globally activated
       tags:
         - check
       shell: grep ^gpgcheck /etc/yum.conf /etc/yum.repos.d/* | grep 0
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.2.3 Ensure GPG keys are configured
       tags:
         - check
       shell: rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --> %{summary}\n'
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.2.4 Ensure Red Hat Network or Subscription Manager connection is configured
       tags:
         - check
       shell: subscription-manager identity
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.2.5 Disable the rhnsd Daemon
       tags:
         - check
       shell: chkconfig --list rhnsd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.2.6 Ensure updates, patches, and additional security software are installed
       tags:
         - check
       shell: yum check-update
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.3.1 Ensure AIDE is installed
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.3.2 Ensure filesystem integrity is regularly checked
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.4.1 Ensure permissions on bootloader config are configured
       tags:
         - check
       shell: stat -c %a%U%G /boot/grub2/grub.cfg | grep 600rootroot
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.4.2 Ensure bootloader password is set
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.4.3 Ensure authentication required for single user mode
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.5.1 Ensure core dumps are restricted
       tags:
         - check
       shell: sysctl fs.suid_dumpable | grep 0
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.5.2 Ensure XD/NX support is enabled
       tags:
         - check
       shell: dmesg | grep "NX "
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.5.3 Ensure address space layout randomization (ASLR) is enabled
       tags:
         - check
       shell: sysctl kernel.randomize_va_space | grep 2
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.5.4 Ensure prelink is disabled
       tags:
         - check
       shell: rpm -q prelink
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.6.1 Ensure SELinux is installed
       tags:
         - check
       shell: rpm -q libselinux
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.6.2 Ensure SELinux is not disabled in bootloader configuration
       tags:
         - check
       shell: grep "^\s*linux" /boot/grub2/grub.cfg|grep -E "selinux=0|enforcing=0"
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.6.3 Ensure the SELinux state is enforcing
       tags:
         - check
       shell: grep SELINUX=enforcing /etc/selinux/config
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.6.4 Ensure SELinux policy is configured
       tags:
         - check
       shell: grep SELINUXTYPE=targeted /etc/selinux/config
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.6.5 Ensure SETroubleshoot is not installed
       tags:
         - check
       shell: rpm -q mcstrans
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.6.6 Ensure the MCS Translation Service (mcstrans) is not installed
       tags:
         - check
       shell: rpm -q mcstrans
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.6.7 Ensure no unconfined daemons exist
       tags:
         - nocheck
       shell: ps -eZ | egrep "initrc" | egrep -vw "tr|ps|egrep|bash|awk" | tr ':' ' ' | awk '{ print $NF }'
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.7.1 Ensure message of the day is configured properly
       tags:
         - check
       shell: egrep '(\\v|\\r|\\m|\\s)' /etc/motd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.7.2 Ensure local login warning banner is configured properly
       tags:
         - check
       shell: grep "Authorized uses only. All activity may be monitored and reported." /etc/issue > /dev/null 2>&1
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.7.3 Ensure remote login warning banner is configured properly
       tags:
         - check
       shell: grep "Authorized uses only. All activity may be monitored and reported." /etc/issue.net > /dev/null 2>&1
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.7.4 Ensure permissions on /etc/motd are configured
       tags:
         - check
       shell: stat -c %a%U%G /etc/motd | grep 644rootroot
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.7.5 Ensure permissions on /etc/issue are configured
       tags:
         - check
       shell: stat /etc/issue | grep 644rootroot
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.7.6 Ensure permissions on /etc/issue.net are configured
       tags:
         - check
       shell: stat /etc/issue.net | grep 644rootroot
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.7.7 Ensure GDM login banner is configured
       tags:
         - check
       shell: rpm -q gdm >/dev/null 2>&1
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.1 Ensure chargen services are not enabled
       tags:
         - check
@@ -358,6 +415,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.2 Ensure daytime services are not enabled
       tags:
         - check
@@ -366,6 +424,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.3 Ensure discard services are not enabled
       tags:
         - check
@@ -374,6 +433,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.4 Ensure echo services are not enabled
       tags:
         - check
@@ -382,6 +442,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.5 Ensure time services are not enabled
       tags:
         - check
@@ -390,6 +451,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.6 Ensure rsh server is not enabled
       tags:
         - check
@@ -398,6 +460,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.7 Ensure talk server is not enabled
       tags:
         - check
@@ -406,6 +469,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.8 Ensure telnet server is not enabled
       tags:
         - check
@@ -414,6 +478,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.9 Ensure tftp server is not enabled
       tags:
         - check
@@ -422,6 +487,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.10 Ensure rsync service is not enabled
       tags:
         - check
@@ -430,6 +496,7 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.8.11 Ensure xinetd is not enabled
       tags:
         - check
@@ -438,12 +505,14 @@
         chkconfig --list xinetd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.1 Ensure time synchronization is in use
       tags:
         - check
       shell: rpm -q ntp chrony | grep "is not installed" | wc -l | grep 2
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.2 Ensure ntp is configured
       tags:
         - check
@@ -464,6 +533,7 @@
         fi
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.3 Ensure chrony is configured
       tags:
         - check
@@ -484,12 +554,14 @@
         fi
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.4 Ensure X Window System is not installed
       tags:
         - nocheck
       shell: rpm -qa xorg-x11*
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.5 Ensure Avahi Server is not enabled
       tags:
         - nocheck
@@ -504,6 +576,7 @@
         done
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.6 Ensure CUPS is not enabled
       tags:
         - nocheck
@@ -518,6 +591,7 @@
         done
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.7 Ensure DHCP Server is not enabled
       tags:
         - nocheck
@@ -532,6 +606,7 @@
         done
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.8 Ensure LDAP server is not enabled
       tags:
         - nocheck
@@ -546,12 +621,14 @@
         done
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.9 Ensure NFS and RPC are not enabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.10 Ensure DNS Server is not enabled
       tags:
         - nocheck
@@ -566,48 +643,56 @@
         done
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.11 Ensure FTP Server is not enabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.12 Ensure HTTP server is not enabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.13 Ensure IMAP and POP3 server is not enabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.14 Ensure Samba is not enabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.15 Ensure HTTP Proxy Server is not enabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.16 Ensure SNMP Server is not enabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.17 Ensure mail transfer agent is configured for local-only mode
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.9.18 Ensure NIS Server is not enabled
       tags:
         - nocheck
@@ -622,594 +707,693 @@
         done
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.10.1 Ensure NIS Client is not installed
       tags:
         - check
       shell: rpm -q ypbind rsh talk
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.10.2 Ensure rsh client is not installed
       tags:
         - check
       shell: rpm -q rsh
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.10.3 Ensure talk client is not installed
       tags:
         - check
       shell: rpm -q talk
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.10.4 Ensure telnet client is not installed
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.10.5 Ensure LDAP client is not installed
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.11.1 Ensure IP forwarding is disabled
       tags:
         - check
       shell: sysctl net.ipv4.ip_forward | grep 0
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.11.2 Ensure packet redirect sending is disabled
       tags:
         - check
       shell: sysctl net.ipv4.conf.all.send_redirects net.ipv4.conf.default.send_redirects | grep 0 | wc -l | grep 2
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.12.1 Ensure source routed packets are not accepted
       tags:
         - check
       shell: sysctl net.ipv4.conf.all.accept_source_route  net.ipv4.conf.default.accept_source_route | grep 0 | wc -l |grep 2
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.12.2 Ensure ICMP redirects are not accepted
       tags:
         - check
       shell: sysctl net.ipv4.conf.all.accept_redirects  net.ipv4.conf.default.accept_redirects | grep 0 | wc -l |grep 2
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.12.3 Ensure secure ICMP redirects are not accepted
       tags:
         - check
       shell: sysctl net.ipv4.conf.all.secure_redirects net.ipv4.conf.default.secure_redirects  | grep 0 | wc -l |grep 2
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.12.4 Ensure suspicious packets are logged
       tags:
         - check
       shell: sysctl net.ipv4.conf.all.log_martians  net.ipv4.conf.default.log_martians  | grep 1 | wc -l |grep 2
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.12.5 Ensure broadcast ICMP requests are ignored
       tags:
         - check
       shell: sysctl net.ipv4.icmp_echo_ignore_broadcasts | grep 1
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.12.6 Ensure bogus ICMP responses are ignored
       tags:
         - check
       shell: sysctl net.ipv4.icmp_ignore_bogus_error_responses | grep 1
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.12.7 Ensure Reverse Path Filtering is enabled
       tags:
         - check
       shell: sysctl net.ipv4.conf.all.rp_filter  net.ipv4.conf.default.rp_filter | grep 1 | wc -l | grep 2
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.12.8 Ensure TCP SYN Cookies is enabled
       tags:
         - check
       shell: sysctl net.ipv4.tcp_syncookies | grep 1
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.13.1 Ensure IPv6 router advertisements are not accepted
       tags:
         - check
       shell: sysctl net.ipv6.conf.all.accept_ra  net.ipv6.conf.default.accept_ra | grep 0 | wc -l | grep 2
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.13.2 Ensure IPv6 redirects are not accepted
       tags:
         - check
       shell: sysctl net.ipv6.conf.all.accept_redirects net.ipv6.conf.default.accept_redirects | grep 0 | wc -l | grep 2
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.13.3 Ensure IPv6 is disabled
       tags:
         - check
       shell: modprobe -c | grep ipv6 | grep "options ipv6 disable=1"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.14.1 Ensure TCP Wrappers is installed
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.14.2 Ensure /etc/hosts.allow is configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.14.3 Ensure /etc/hosts.deny is configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.14.4 Ensure permissions on /etc/hosts.allow are configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.14.5 Ensure permissions on /etc/hosts.deny are configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.15.1 Ensure DCCP is disabled
       tags:
         - check
       shell: grep "^install dccp /bin/true" /etc/modprobe.d/CIS.conf
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.15.2 Ensure SCTP is disabled
       tags:
         - check
       shell: grep "^install sctp /bin/true" /etc/modprobe.d/CIS.conf
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.15.3 Ensure RDS is disabled
       tags:
         - check
       shell: grep "^install rds /bin/true" /etc/modprobe.d/CIS.conf
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.15.4 Ensure TIPC is disabled
       tags:
         - check
       shell: grep "^install tipc /bin/true" /etc/modprobe.d/CIS.conf
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.16.1 Ensure iptables is installed
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.16.2 Ensure default deny firewall policy
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.16.3 Ensure loopback traffic is configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.16.4 Ensure outbound and established connections are configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.16.5 Ensure firewall rules exist for all open ports
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.16.6 Ensure wireless interfaces are disabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.17.1 Ensure audit log storage size is configured
       tags:
         - check
       shell: grep "^max_log_file = 10" /etc/audit/auditd.conf
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.2 Ensure system is disabled when audit logs are full
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.17.3 Ensure audit logs are not automatically deleted
       tags:
         - check
       shell: grep "^max_log_file_action = ROTATE" /etc/audit/auditd.conf
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.4 Ensure auditd service is enabled
       tags:
         - check
       shell: systemctl is-enabled auditd | grep enabled
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.5 Ensure auditing for processes that start prior to auditd is enabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.17.6 Ensure events that modify date and time information are collected
       tags:
         - check
       shell: grep time-change /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.7 Ensure events that modify user/group information are collected
       tags:
         - check
       shell: grep identity /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.8 Ensure events that modify the system's network environment are collected
       tags:
         - check
       shell: grep system-locale /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.9 Ensure events that modify the system's Mandatory Access Controls are collected
       tags:
         - check
       shell: grep MAC-policy /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.10 Ensure login and logout events are collected
       tags:
         - check
       shell: grep logins /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.11 Ensure session initiation information is collected
       tags:
         - check
       shell: grep session /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.12 Ensure discretionary access control permission modification events are collected
       tags:
         - check
       shell: grep perm_mod /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.13 Ensure unsuccessful unauthorized file access attempts are collected
       tags:
         - check
       shell: grep access /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.14 Ensure use of privileged commands is collected
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.15 Ensure successful file system mounts are collected
       tags:
         - check
       shell: grep mounts /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.16 Ensure file deletion events by users are collected
       tags:
         - check
       shell: grep delete /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.17 Ensure changes to system administration scope (sudoers) is collected
       tags:
         - check
       shell: grep scope /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.18 Ensure system administrator actions (sudolog) are collected
       tags:
         - check
       shell: grep actions /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.19 Ensure kernel module loading and unloading is collected
       tags:
         - check
       shell: grep modules /etc/audit/audit.rules
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.17.20 Ensure the audit configuration is immutable
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.18.1 Ensure rsyslog Service is enabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.18.2 Ensure logging is configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.18.3 Ensure rsyslog default file permissions configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.18.4 Ensure rsyslog is configured to send logs to a remote log host
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.18.5 Ensure remote rsyslog messages are only accepted on designated log hosts.
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.18.6 Ensure syslog-ng service is enabled
       tags:
         - check
       shell: systemctl is-enabled syslog-ng | grep enabled
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.18.7 Ensure logging is configured (syslog-ng)
       tags:
         - check
       shell: grep "source s_local" /opt/syslog-ng/etc/syslog-ng.conf >/dev/null 2>&1
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.18.8 Ensure syslog-ng default file permissions configured
       tags:
         - check
       shell: grep /var/log/messages /opt/syslog-ng/etc/syslog-ng.conf 2>/dev/null | grep 0640 >/dev/null 2>&1
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.18.9 Ensure syslog-ng is configured to send logs to a remote log host
       tags:
         - check
       shell: grep cibseclog01 /opt/syslog-ng/etc/syslog-ng.conf >/dev/null 2>&1
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.18.10 Ensure remote syslog-ng messages are only accepted on designated log hosts
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.18.11 Ensure rsyslog or syslog-ng is installed
       tags:
         - check
       shell: rpm -qa | grep syslog-ng >/dev/null 2>&1
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.18.12 Ensure permissions on all logfiles are configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.18.13 Ensure logrotate is configured
       tags:
         - check
       shell: grep /var/log/messages /etc/logrotate.d/* >/dev/null 2>&1
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.19.1 Ensure cron daemon is enabled
       tags:
         - check
       shell: systemctl is-enabled crond | grep enabled
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.19.2 Ensure permissions on /etc/crontab are configured
       tags:
         - check
       shell: stat /etc/crontab|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.19.3 Ensure permissions on /etc/cron.hourly are configured
       tags:
         - check
       shell: stat /etc/cron.hourly|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.19.4 Ensure permissions on /etc/cron.daily are configured
       tags:
         - check
       shell: stat /etc/cron.daily|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.19.5 Ensure permissions on /etc/cron.weekly are configured
       tags:
         - check
       shell: stat /etc/cron.weekly|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.19.6 Ensure permissions on /etc/cron.monthly are configured
       tags:
         - check
       shell: stat /etc/cron.monthly|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.19.7 Ensure permissions on /etc/cron.d are configured
       tags:
         - check
       shell: stat /etc/cron.d|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.19.8 Ensure at/cron is restricted to authorized users
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.20.1 Ensure permissions on /etc/ssh/sshd_config are configured
       tags:
         - check
       shell: stat /etc/ssh/sshd_config|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.2 Ensure SSH Protocol is set to 2
       tags:
         - check
       shell: grep "^Protocol" /etc/ssh/sshd_config|grep 2
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.3 Ensure SSH LogLevel is set to INFO
       tags:
         - check
       shell: grep "^LogLevel" /etc/ssh/sshd_config|grep INFO
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.4 Ensure SSH X11 forwarding is disabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.20.5 Ensure SSH MaxAuthTries is set to 4 or less
       tags:
         - check
       shell: grep "^MaxAuthTries" /etc/ssh/sshd_config|grep 4
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.6 Ensure SSH IgnoreRhosts is enabled
       tags:
         - check
       shell: grep "^IgnoreRhosts" /etc/ssh/sshd_config|grep yes
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.7 Ensure SSH HostbasedAuthentication is disabled
       tags:
         - check
       shell: grep "^HostbasedAuthentication" /etc/ssh/sshd_config|grep no
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.8 Ensure SSH root login is disabled
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.20.9 Ensure SSH PermitEmptyPasswords is disabled
       tags:
         - check
       shell: grep "^PermitEmptyPasswords" /etc/ssh/sshd_config|grep no
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.10 Ensure SSH PermitUserEnvironment is disabled
       tags:
         - check
       shell: grep PermitUserEnvironment /etc/ssh/sshd_config|grep no
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.11 Ensure only approved ciphers are used
       tags:
         - check
       shell: grep "Ciphers" /etc/ssh/sshd_config|grep "ctr|gcm"|grep -v cbc
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.12 Ensure only approved MAC algorithms are used
       tags:
         - check
       shell: grep "MACs" /etc/ssh/sshd_config|grep -E "hmac,umac-128,sha256"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.13 Ensure SSH Idle Timeout Interval is configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.20.14 Ensure SSH LoginGraceTime is set to one minute or less
       tags:
         - check
       shell: grep "^LoginGraceTime" /etc/ssh/sshd_config|grep 60
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.20.15 Ensure SSH access is limited
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.20.16 Ensure SSH warning banner is configured
       tags:
         - check
       shell: grep "^Banner" /etc/ssh/sshd_config|grep -E "/etc/issue.net"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.21.1 Ensure password creation requirements are configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.21.2 Ensure lockout for failed password attempts is configured
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.21.3 Ensure password reuse is limited
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.21.4 Ensure password hashing algorithm is SHA-512
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.22.1 Ensure password expiration is 90 days or less
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.22.2 Ensure minimum days between password changes is 7 or more
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.22.3 Ensure password expiration warning days is 7 or more
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.22.4 Ensure inactive password lock is 30 days or less
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.22.5 Ensure system accounts are non-login
       tags:
         - check
@@ -1217,6 +1401,7 @@
         egrep -v "^\+" /etc/passwd | awk -F: '($1!="root" && $1!="sync" && $1!="shutdown" && $1!="halt" && $3<1000 && $7!="/sbin/nologin" && $7!="/bin/false") {print}'
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.22.6 Ensure default group for the root account is GID 0
       tags:
         - check
@@ -1224,108 +1409,126 @@
         grep "^root:" /etc/passwd | cut -f4 -d: | grep 0
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.22.7 Ensure default user umask is 027 or more restrictive
       tags:
         - check
       shell: grep "^umask" /etc/bashrc  /etc/profile|grep 027|wc -l
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.22.8 Ensure root login is restricted to system console
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.22.9 Ensure access to the su command is restricted
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.23.1 Audit system file permissions
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.23.2 Ensure permissions on /etc/passwd are configured
       tags:
         - check
       shell: stat /etc/passwd|grep Access|grep 0644|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.23.3 Ensure permissions on /etc/shadow are configured
       tags:
         - check
       shell: stat /etc/shadow|grep Access|grep 0000|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.23.4 Ensure permissions on /etc/group are configured
       tags:
         - check
       shell: stat /etc/group|grep Access|grep 0644|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.23.5 Ensure permissions on /etc/gshadow are configured
       tags:
         - check
       shell: stat /etc/gshadow|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.23.6 Ensure permissions on /etc/passwd- are configured
       tags:
         - check
       shell: stat /etc/passwd-|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.23.7 Ensure permissions on /etc/shadow- are configured
       tags:
         - check
       shell: stat /etc/shadow-|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.23.8 Ensure permissions on /etc/group- are configured
       tags:
         - check
       shell: stat /etc/group-|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.23.9 Ensure permissions on /etc/gshadow- are configured
       tags:
         - check
       shell: stat /etc/gshadow-|grep Access|grep 0600|grep -E "0/"
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.23.10 Ensure no world writable files exist
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.23.11 Ensure no unowned files or directories exist
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.23.12 Ensure no ungrouped files or directories exist
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.23.13 Audit SUID executables
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.23.14 Audit SGID executables
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.1 Ensure password fields are not empty
       tags:
         - check
@@ -1333,24 +1536,28 @@
         cat /etc/shadow | awk -F: '($2 == "" ) { print $1 " does not have a password "}'|wc -l
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.2 Ensure no legacy "+" entries exist in /etc/passwd
       tags:
         - check
       shell: grep '^+:' /etc/passwd
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.3 Ensure no legacy "+" entries exist in /etc/shadow
       tags:
         - check
       shell: grep '^+:' /etc/shadow
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.4 Ensure no legacy "+" entries exist in /etc/group
       tags:
         - check
       shell: grep '^+:' /etc/group
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.5 Ensure root is the only UID 0 account
       tags:
         - check
@@ -1358,6 +1565,7 @@
         cat /etc/passwd | awk -F: '($3 == 0) { print $1 }'|grep root
       register: result
       failed_when: result.rc == 1
+      ignore_errors: yes
     - name: 2.24.6 Ensure root PATH Integrity
       tags:
         - check
@@ -1367,6 +1575,7 @@
         then echo "Trailing : in PATH" fi p=`echo $PATH | sed -e 's/::/:/' -e 's/:$//' -e 's/:/ /g'` set -- $p while [ "$1" != "" ]
       register: result
       failed_when: result <> ""
+      ignore_errors: yes
     - name: 2.24.7 Ensure all users' home directories exist
       tags:
         - check
@@ -1376,48 +1585,56 @@
         then echo "The home directory ($dir) of user $user does not exist." fi done
       register: result
       failed_when: result <> ""
+      ignore_errors: yes
     - name: 2.24.8 Ensure users' home directories permissions are 750 or more restrictive
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.9 Ensure users own their home directories
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.10 Ensure users' dot files are not group or world writable
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.11 Ensure no users have .forward files
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.12 Ensure no users have .netrc files
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.13 Ensure users' .netrc Files are not group or world accessible
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.14 Ensure no users have .rhosts files
       tags:
         - nocheck
       shell: 
       register: result
       failed_when: result.rc == 0
+      ignore_errors: yes
     - name: 2.24.15 Ensure all groups in /etc/passwd exist in /etc/group
       tags:
         - check
@@ -1425,6 +1642,7 @@
         for i in $(cut -s -d: -f4 /etc/passwd | sort -u ); do grep -q -P "^.*?:[^:]*:$i:" /etc/group if [ $? -ne 0 ]; then echo "Group $i is referenced by /etc/passwd but does not exist in /etc/group" fi done
       register: result
       failed_when: result <> ""
+      ignore_errors: yes
     - name: 2.24.16 Ensure no duplicate UIDs exist
       tags:
         - check
@@ -1432,6 +1650,7 @@
         cat /etc/passwd | cut -f3 -d":" | sort -n | uniq -c | while read x ; do [ -z "${x}" ] && break set - $x if [ $1 -gt 1 ]; then users=`awk -F: '($3 == n) { print $1 }' n=$2 /etc/passwd | xargs` echo "Duplicate UID ($2): ${users}" fi done
       register: result
       failed_when: result <> ""
+      ignore_errors: yes
     - name: 2.24.17 Ensure no duplicate GIDs exist
       tags:
         - check
@@ -1439,6 +1658,7 @@
         cat /etc/group | cut -f3 -d":" | sort -n | uniq -c | while read x ; do [ -z "${x}" ] && break set - $x if [ $1 -gt 1 ]; then groups=`awk -F: '($3 == n) { print $1 }' n=$2 /etc/group | xargs` echo "Duplicate GID ($2): ${groups}" fi done
       register: result
       failed_when: result <> ""
+      ignore_errors: yes
     - name: 2.24.18 Ensure no duplicate user names exist
       tags:
         - check
@@ -1446,6 +1666,7 @@
         cat /etc/passwd | cut -f1 -d":" | sort -n | uniq -c | while read x ; do [ -z "${x}" ] && break set - $x if [ $1 -gt 1 ]; then uids=`awk -F: '($1 == n) { print $3 }' n=$2 /etc/passwd | xargs` echo "Duplicate User Name ($2): ${uids}" fi done
       register: result
       failed_when: result <> ""
+      ignore_errors: yes
     - name: 2.24.19 Ensure no duplicate group names exist
       tags:
         - check
@@ -1454,3 +1675,4 @@
         if [ $1 -gt 1 ]; then gids=`gawk -F: '($1 == n) { print $3 }' n=$2 /etc/group | xargs` echo "Duplicate Group Name ($2): ${gids}" fi done
       register: result
       failed_when: result <> ""
+      ignore_errors: yes
