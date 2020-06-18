@@ -1,5 +1,7 @@
 - name: OS Hardening
   hosts: all
+  vars:
+    compliant: ""
   tasks:
     - name: 2.1.1 Ensure mounting of cramfs filesystems is disabled
       tags:
