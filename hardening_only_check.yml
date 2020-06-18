@@ -1,4 +1,4 @@
-- name: OS Hardening
+- name: OS Hardening Check
   hosts: all
   vars:
     compliant: ""
