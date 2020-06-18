@@ -1,0 +1,6 @@
+---
+
+- name: Run OpenSCAP check
+  hosts: all
+  roles:
+    - { role: openscap_harden, sudo: yes }
