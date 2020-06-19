@@ -2,5 +2,25 @@
 
 - name: Run OpenSCAP check
   hosts: all
-  roles:
-    - { role: openscap, sudo: yes }
+  tasks:
+    - name: Copy base C2S  RHEL7 XCCDF files to hosts
+      get_url:
+        url: http://192.168.8.248/ssg-rhel7-ds-1.2.xml
+        dest: /tmp/ssg-rhel7-ds-1.2.xml
+        mode: '0400'
+    - name: Copy customization C2S  RHEL7 XCCDF files to hosts
+      get_url:
+        url: http://192.168.8.248/ssg-rhel7-ds-1-tailoring.xml
+        dest: /tmp/ssg-rhel7-ds-1-tailoring.xml
+        mode: '0400'
+    - name: Run evaluation and store result and report files
+      shell: |
+        oscap xccdf eval --tailoring-file /tmp/ssg-rhel7-ds-1-tailoring.xml \
+        --profile xccdf_org.ssgproject.content_profile_C2S --results-arf /tmp/arf.xml \
+        --results /tmp/results.xml --report /tmp/report.html --oval-results --progress /tmp/ssg-rhel7-ds-1.2.xml
+    - name: Create Ansible playbook from results
+      shell: |
+        oscap xccdf generate fix --fix-type ansible \
+        --result-id "" \
+        --output /tmp/ssg-rhel7-ds-playbook-result.yml \
+        /tmp/results.xml
