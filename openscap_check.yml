@@ -18,7 +18,7 @@
         oscap xccdf eval --tailoring-file /tmp/ssg-rhel7-ds-1-tailoring.xml \
         --profile xccdf_org.ssgproject.content_profile_C2S --results-arf /tmp/{{ ansible_hostname }}-arf.xml \
         --results /tmp/{{ ansible_hostname }}-results.xml --report /tmp/{{ ansible_hostname }}-report.html \
-        --oval-results --progress /tmp/ssg-rhel7-ds-1.2.xml > /tmp/{{ ansible_hostname }}-oval-results.txt
+        --oval-results --progress /tmp/ssg-rhel7-ds-1.2.xml > /tmp/{{ ansible_hostname }}-oval-results.txt 2>/dev/null
       ignore_errors: yes
     - name: Create Ansible playbook from results
       shell: |
