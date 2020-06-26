@@ -32,5 +32,5 @@
     - name: Upload results to git
       shell: |
         curl -i -X PUT -H 'Authorization: token {{ token }}' \
-        -d '{"message": "sample", "content”: “{{ oval-results.stdout }}"}' \
+        -d '{"message": "Oval results for {{ ansible_hostname }}", "content”: “{{ oval-results.stdout }}"}' \
         https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-oval-results.txt
