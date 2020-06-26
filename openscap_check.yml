@@ -36,10 +36,10 @@
       shell: |
         curl -i -X PUT -H 'Authorization: token {{ token }}' \
         -d '{"message": "Oval results for {{ ansible_hostname }}", "content": "{{ results.stdout }}"}' \
-        https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-oval-results.txt
+        https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-oval-results.txt
     - name: Upload report to git
       shell: |
         curl -i -X PUT -H 'Authorization: token {{ token }}' \
         -d '{"message": "Report for {{ ansible_hostname }}", "content": "{{ report.stdout }}"}' \
-        https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-report.html
+        https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-report.html
   
