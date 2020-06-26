@@ -40,9 +40,10 @@
     - name: Upload report to git
       uri:
         url: https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-report.html
-        method: POST
+        method: PUT
         headers:
           Authorization: "Token {{ token }}"
+        status_code: 200
         body_format: json
         body:
           "message": "Report for {{ ansible_hostname }}"
