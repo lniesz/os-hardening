@@ -28,14 +28,14 @@
         /tmp/{{ ansible_hostname }}-results.xml
     - name: Encode result file
       shell: cat /tmp/{{ ansible_hostname }}-oval-results.txt|base64 -w 0
-      register: oval-results
+      register: results
     - name: Encode report file
       shell: cat /tmp/{{ ansible_hostname }}-report.html|base64 -w 0
       register: report
     - name: Upload results to git
       shell: |
         curl -i -X PUT -H 'Authorization: token {{ token }}' \
-        -d '{"message": "Oval results for {{ ansible_hostname }}", "content": "{{ oval-results.stdout }}"}' \
+        -d '{"message": "Oval results for {{ ansible_hostname }}", "content": "{{ results.stdout }}"}' \
         https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-oval-results.txt
     - name: Upload report to git
       shell: |
