@@ -43,6 +43,8 @@
         method: PUT
         headers:
           Authorization: "Token {{ token }}"
-        status_code: 200
+        status_code:
+          - 200
+          - 201
         body_format: json
         body: '{"message": "Report for {{ ansible_hostname }}","content": "{{ report.stdout }}"}'
