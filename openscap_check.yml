@@ -29,14 +29,22 @@
     - name: Encode result file
       shell: cat /tmp/{{ ansible_hostname }}-oval-results.txt|base64 -w 0
       register: results
+      no_log: true
     - name: Encode report file
       shell: cat /tmp/{{ ansible_hostname }}-report.html|base64 -w 0
       register: report
+      no_log: true
     - name: Upload results to git
-      shell: |
-        curl -i -X PUT -H 'Authorization: token {{ token }}' \
-        -d '{"message": "Oval results for {{ ansible_hostname }}", "content": "{{ results.stdout }}"}' \
-        https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-oval-results.txt
+      uri:
+        url: https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-oval-results.txt
+        method: PUT
+        headers:
+          Authorization: "Token {{ token }}"
+        status_code: 
+          - 200
+          - 201
+        body_format: json
+        body: '{"message": "Oval results for {{ ansible_hostname }}", "content": "{{ results.stdout }}"}'
     - name: Upload report to git
       uri:
         url: https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-report.html
