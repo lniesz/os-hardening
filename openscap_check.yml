@@ -7,7 +7,6 @@
       apt: 
         name: python-pip
         state: latest
-
     - name: Install ansible pip dependencies for Ansible
       pip:
         name: "{{ item }}"
@@ -18,7 +17,7 @@
         - boto
         - hvac
         - "hvac[parser]"
-    tasks:
+  tasks:
     - name: Copy base C2S  RHEL7 XCCDF files to hosts
       get_url:
         url: http://192.168.8.248/ssg-rhel7-ds-1.2.xml
