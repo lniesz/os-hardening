@@ -9,8 +9,11 @@
         state: present
     - name: Install ansible pip dependencies for Ansible
       pip:
-        name: ['pip', 'psycopg2-binary', 'boto', 'hvac', 'hvac[parser]']
-        state: latest
+        name: 
+          - psycopg2-binary
+          - boto
+          - hvac
+          - hvac[parser]
   tasks:
     - name: Copy base C2S  RHEL7 XCCDF files to hosts
       get_url:
