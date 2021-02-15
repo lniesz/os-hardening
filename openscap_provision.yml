@@ -2,6 +2,6 @@
 
 - name: All machines get OpenSCAP scanner installed
   hosts: all
-  sudo: true
+  become: true
   roles:
     - openscap
