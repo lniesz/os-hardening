@@ -10,6 +10,7 @@
     - name: Install ansible pip dependencies for Ansible
       pip:
         name: 
+          - pip < 21.0
           - psycopg2-binary
           - boto
           - hvac
