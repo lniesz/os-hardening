@@ -4,9 +4,9 @@
   hosts: all
   pre_tasks:
     - name: Install Pip
-      apt: 
+      yum: 
         name: python-pip
-        state: latest
+        state: present
     - name: Install ansible pip dependencies for Ansible
       pip:
         name: "{{ item }}"
