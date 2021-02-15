@@ -10,12 +10,12 @@
     - name: Install ansible pip dependencies for Ansible
       pip:
         name: 
-          - pip
+          - pip<21
           - psycopg2-binary
           - boto
           - hvac
           - "hvac[parser]" 
-        executable: pip
+        executable: pip2
   tasks:
     - name: Copy base C2S  RHEL7 XCCDF files to hosts
       get_url:
