@@ -15,8 +15,7 @@
           - boto
           - hvac
           - hvac[parser]
-        state: latest
-        executable: pip      
+        executable: pip2      
   tasks:
     - name: Copy base C2S  RHEL7 XCCDF files to hosts
       get_url:
