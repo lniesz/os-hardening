@@ -5,7 +5,7 @@
     src: /dev/sr0
     fstype: iso9660
     opts: ro,noauto
-    state: present
+    state: mounted
 - name: Install OpenSCAP packages
   become: true
   yum:
