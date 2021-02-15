@@ -1,4 +1,8 @@
 ---
 - name: Install OpenSCAP packages
-  yum: pkg=['openscap', 'openscap-utils'] state=installed
+  yum:
+    name:
+      - openscap
+      - openscap-utils
+    state: present
   ignore_errors: true
