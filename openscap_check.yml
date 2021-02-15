@@ -13,7 +13,7 @@
         state: latest
       with_items:
         - pip
-        - psycopg2
+        - psycopg2-binary
         - boto
         - hvac
         - "hvac[parser]"
