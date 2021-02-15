@@ -1,4 +1,11 @@
 ---
+- name: Mount DVD read-only
+  ansible.posix.mount:
+    path: /cdrom
+    src: /dev/sr0
+    fstype: iso9660
+    opts: ro,noauto
+    state: present
 - name: Install OpenSCAP packages
   become: true
   yum:
@@ -7,3 +14,7 @@
       - openscap-utils
     state: present
   ignore_errors: true
+- name: Unmount DVD
+  ansible.posix.mount:
+    path: /cdrom
+    state: unmounted
