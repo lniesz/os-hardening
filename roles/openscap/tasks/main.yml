@@ -1,6 +1,6 @@
 ---
 - name: Mount DVD read-only
-  ansible.posix.mount:
+  mount:
     path: /cdrom
     src: /dev/sr0
     fstype: iso9660
@@ -15,6 +15,6 @@
     state: present
   ignore_errors: true
 - name: Unmount DVD
-  ansible.posix.mount:
+  mount:
     path: /cdrom
     state: unmounted
