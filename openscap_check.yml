@@ -14,7 +14,8 @@
           - psycopg2-binary
           - boto
           - hvac
-        executable: pip2
+          - "hvac[parser]" 
+        executable: pip3.3
   tasks:
     - name: Copy base C2S  RHEL7 XCCDF files to hosts
       get_url:
