@@ -2,8 +2,6 @@
 
 - name: Run OpenSCAP check
   hosts: all
-  vars:
-    token: "{{ lookup('hashi_vault', 'secret=kv/github_tokens/lniesz:value')}}"
   pre_tasks:
     - name: Install Pip
       yum: 
@@ -66,7 +64,7 @@
         url: https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-oval-results.txt
         method: PUT
         headers:
-          Authorization: "Token {{ lookup('hashi_vault', 'secret=kv/github_tokens/lniesz:value')}}"
+          Authorization: "Token {{ token }}"
         status_code: 
           - 200
           - 201
@@ -77,7 +75,7 @@
         url: https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-report.html
         method: PUT
         headers:
-          Authorization: "Token {{ lookup('hashi_vault', 'secret=kv/github_tokens/lniesz:value')}}"
+          Authorization: "Token {{ token }}"
         status_code:
           - 200
           - 201
