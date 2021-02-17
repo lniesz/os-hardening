@@ -69,6 +69,7 @@
           - 201
         body_format: json
         body: '{"message": "Oval results for {{ ansible_hostname }}", "content": "{{ results.stdout }}"}'
+        no_log: true
     - name: Upload report to git
       uri:
         url: https://api.github.com/repos/lniesz/os-hardening/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-report.html
@@ -80,3 +81,4 @@
           - 201
         body_format: json
         body: '{"message": "Report for {{ ansible_hostname }}","content": "{{ report.stdout }}"}'
+        no_log: true
