@@ -3,7 +3,7 @@
 - name: Run OpenSCAP check
   hosts: all
   vars:
-    token: "{{ lookup('hashi_vault', 'secret=secret/kv/github_tokens/lniesz') }}"
+    token: "{{ lookup('hashi_vault', 'secret=/kv/data:/github_tokens/lniesz') }}"
   pre_tasks:
     - name: Install Pip
       yum: 
@@ -18,6 +18,9 @@
           - hvac
           - hvac[parser]    
   tasks:
+    - name: Return latest KV v2 secret from path
+      debug:
+        msg: "{{ lookup('hashi_vault', 'secret=/kv/data:/github_tokens/lniesz') }}"
     - name: Copy base C2S  RHEL7 XCCDF files to hosts
       get_url:
         url: http://192.168.8.248/ssg-rhel7-ds-1.2.xml
