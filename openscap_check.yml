@@ -4,7 +4,7 @@
   hosts: all
   vars:
     secret_key: "{{ github_token_owner }}"
-    token: "{{ lookup('hashi_vault', 'secret=kv/data/github_tokens:data') }}"['lniesz']
+    token: "{{ lookup('hashi_vault', 'secret=kv/data/github_tokens:data') }}"
   pre_tasks:
     - name: Install Pip
       yum: 
@@ -19,6 +19,8 @@
           - hvac
           - hvac[parser]    
   tasks:
+    - debug:
+        msg: "{{ token }}"
     - name: Copy base C2S  RHEL7 XCCDF files to hosts
       get_url:
         url: http://192.168.8.248/ssg-rhel7-ds-1.2.xml
