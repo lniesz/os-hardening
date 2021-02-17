@@ -3,7 +3,7 @@
 - name: Run OpenSCAP check
   hosts: all
   vars:
-    token: "{{ lookup('hashi_vault', 'secret=/github_tokens/lniesz:value') }}"
+    token: "{{ lookup('hashi_vault', 'secret=kv/github_tokens/lniesz:value') }}"
   pre_tasks:
     - name: Install Pip
       yum: 
