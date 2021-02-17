@@ -5,7 +5,7 @@
   vars:
     secret_key: "{{ github_token_owner }}"
     token_data: "{{ lookup('hashi_vault', 'secret=kv/data/github_tokens:data') }}"
-    token: "{{ token_data['lniesz'] }}"
+    token: "{{ token_data[secret_key] }}"
   pre_tasks:
     - name: Install Pip
       yum: 
