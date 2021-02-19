@@ -13,4 +13,4 @@
         msg: "{{ ansible_password }}"
         
     - name: Test connection to host
-      ping: os42master1.localdomain   
+      ping: 
