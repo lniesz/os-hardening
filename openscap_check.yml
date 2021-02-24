@@ -66,7 +66,7 @@
       no_log: true
     - name: Upload results to git
       uri:
-        url: {{ git_repo_url }}/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-oval-results.txt
+        url: {{ git_repo_url }}/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-oval-results.txt
         method: PUT
         headers:
           Authorization: "Token {{ token }}"
@@ -78,7 +78,7 @@
       no_log: true
     - name: Upload report to git
       uri:
-        url: {{ git_repo_url }}/contents/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-report.html
+        url: {{ git_repo_url }}/results/{{ ansible_hostname }}-{{ ansible_date_time.epoch }}-report.html
         method: PUT
         headers:
           Authorization: "Token {{ token }}"
